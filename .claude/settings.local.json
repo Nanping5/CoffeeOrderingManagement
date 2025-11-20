@@ -2,7 +2,20 @@
   "permissions": {
     "allow": [
       "Bash(dir:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(tree:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(curl:*)",
+      "Bash(start http://localhost:3001)",
+      "Bash(start http://localhost:3002)",
+      "Bash(start \"http://localhost:5000/api/menu/\")",
+      "Bash(start http://localhost:3003)",
+      "Bash(start http://localhost:3004)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

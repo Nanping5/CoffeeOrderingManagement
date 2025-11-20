@@ -143,16 +143,10 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: DefaultLayout,
-    children: [
-      {
-        path: '',
-        component: NotFound,
-        meta: {
-          title: '页面不存在'
-        }
-      }
-    ]
+    component: NotFound,
+    meta: {
+      title: '页面不存在'
+    }
   }
 ]
 

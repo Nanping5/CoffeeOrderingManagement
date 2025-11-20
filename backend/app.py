@@ -11,7 +11,7 @@ def create_app(config_name=None):
         config_name = os.environ.get('FLASK_ENV', 'development')
 
     # 创建Flask应用实例
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='public', static_url_path='/static')
 
     # 加载配置
     app.config.from_object(config[config_name])
@@ -22,12 +22,15 @@ def create_app(config_name=None):
     # 注册蓝图
     from routes.auth import auth_bp
     from routes.user import user_bp
-    from routes.menu import menu_bp
     from routes.order import order_bp
+
+    # 使用数据库菜单路由
+    from routes.menu import menu_bp
+    app.register_blueprint(menu_bp, url_prefix='/api/menu')
+    print("使用数据库版本的菜单路由")
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(user_bp, url_prefix='/api/users')
-    app.register_blueprint(menu_bp, url_prefix='/api/menu')
     app.register_blueprint(order_bp, url_prefix='/api/orders')
 
     # 错误处理
@@ -63,7 +66,8 @@ def create_app(config_name=None):
         """健康检查接口"""
         try:
             # 检查数据库连接
-            db.session.execute('SELECT 1')
+            from sqlalchemy import text
+            db.session.execute(text('SELECT 1'))
             return jsonify({
                 'status': 'healthy',
                 'database': 'connected',

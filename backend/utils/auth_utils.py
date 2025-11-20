@@ -132,3 +132,38 @@ def user_exists(username=None, email=None):
             return True
 
     return False
+
+import os
+from werkzeug.utils import secure_filename
+
+def allowed_file(filename, allowed_extensions=None):
+    """检查文件扩展名是否允许"""
+    if allowed_extensions is None:
+        allowed_extensions = {'png', 'jpg', 'jpeg', 'gif'}
+
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
+def save_file(file, upload_folder='uploads', allowed_extensions=None):
+    """保存上传的文件"""
+    if file and allowed_file(file.filename, allowed_extensions):
+        # 确保上传目录存在
+        if not os.path.exists(upload_folder):
+            os.makedirs(upload_folder)
+
+        # 获取安全的文件名
+        filename = secure_filename(file.filename)
+
+        # 添加时间戳避免文件名冲突
+        import time
+        timestamp = str(int(time.time()))
+        filename = f"{timestamp}_{filename}"
+
+        # 保存文件
+        file_path = os.path.join(upload_folder, filename)
+        file.save(file_path)
+
+        # 返回相对路径
+        return f"/{upload_folder}/{filename}"
+
+    return None

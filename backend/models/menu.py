@@ -4,20 +4,24 @@ from extensions import db
 
 class MenuItem(db.Model):
     """菜单项模型"""
-    __tablename__ = 'menu'
+    __tablename__ = 'menu_items'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
     price = db.Column(db.Numeric(10, 2), nullable=False)
+    original_price = db.Column(db.Numeric(10, 2), nullable=True)
     category = db.Column(db.String(50), nullable=False, default='coffee', index=True)
     image_url = db.Column(db.String(255), nullable=True)
     is_available = db.Column(db.Boolean, default=True, nullable=False, index=True)
+    is_popular = db.Column(db.Boolean, default=False, nullable=False, index=True)
+    tags = db.Column(db.JSON, nullable=True)
+    order_count = db.Column(db.Integer, default=0, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
-    # 关系
-    order_items = db.relationship('OrderItem', backref='menu_item', lazy='dynamic', cascade='all, delete-orphan')
+    # 关系 - 暂时注释掉以避免依赖问题
+    # order_items = db.relationship('OrderItem', backref='menu_item', lazy='dynamic', cascade='all, delete-orphan')
 
     def __init__(self, name, price, description=None, category='coffee', image_url=None, is_available=True):
         """初始化菜单项"""
@@ -35,9 +39,13 @@ class MenuItem(db.Model):
             'name': self.name,
             'description': self.description,
             'price': float(self.price),
+            'original_price': float(self.original_price) if self.original_price else None,
             'category': self.category,
             'image_url': self.image_url,
             'is_available': self.is_available,
+            'is_popular': self.is_popular,
+            'tags': self.tags,
+            'order_count': self.order_count,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }

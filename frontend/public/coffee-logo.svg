@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="80" height="80">
+  <defs>
+    <linearGradient id="coffeeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6F3410;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Coffee cup -->
+  <path d="M12 25 L12 50 C12 55 15 58 20 58 L44 58 C49 58 52 55 52 50 L52 25 Z" 
+        fill="url(#coffeeGradient)" stroke="#8B4513" stroke-width="2"/>
+  
+  <!-- Coffee liquid -->
+  <path d="M14 30 L14 48 C14 51 16 53 19 53 L45 53 C48 53 50 51 50 48 L50 30 Z" 
+        fill="#D2691E" opacity="0.8"/>
+  
+  <!-- Cup rim -->
+  <ellipse cx="32" cy="25" rx="20" ry="4" fill="#6F3410"/>
+  <ellipse cx="32" cy="25" rx="18" ry="3" fill="#8B4513"/>
+  
+  <!-- Handle -->
+  <path d="M52 30 C58 30 60 32 60 36 C60 40 58 42 52 42" 
+        fill="none" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Steam -->
+  <path d="M22 15 Q20 10 22 8" fill="none" stroke="#DDD" stroke-width="2" 
+        stroke-linecap="round" opacity="0.6"/>
+  <path d="M32 12 Q30 7 32 5" fill="none" stroke="#DDD" stroke-width="2" 
+        stroke-linecap="round" opacity="0.7"/>
+  <path d="M42 15 Q40 10 42 8" fill="none" stroke="#DDD" stroke-width="2" 
+        stroke-linecap="round" opacity="0.6"/>
+</svg>

@@ -1,6 +1,11 @@
-# 咖啡点餐管理系统
+# ☕ 咖啡点餐管理系统
 
-基于 **Flask + Vue3 + MySQL** 的现代化咖啡点餐管理系统，支持用户和管理员双角色，提供完整的点餐、购物车、订单管理等功能。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.3+-green.svg)](https://vuejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-16+-green.svg)](https://nodejs.org/)
+
+基于 **Flask + Vue3 + MySQL** 的现代化咖啡点餐管理系统，采用前后端分离架构，支持用户和管理员双角色，提供完整的点餐、购物车、订单管理等功能。
 
 ## 🚀 项目特性
 
@@ -54,80 +59,156 @@
 
 ```
 Demo/
-├── backend/              # Flask 后端
-│   ├── app.py           # 主应用入口
-│   ├── config.py        # 配置管理
-│   ├── models/          # 数据模型
-│   │   ├── user.py      # 用户模型
-│   │   ├── menu.py      # 菜单模型
-│   │   ├── order.py     # 订单模型
-│   │   └── order_item.py # 订单明细模型
-│   ├── routes/          # API 路由
-│   │   ├── auth.py      # 认证路由
-│   │   ├── menu.py      # 菜单路由
-│   │   ├── order.py     # 订单路由
-│   │   └── user.py      # 用户路由
-│   ├── services/        # 业务逻辑层
-│   └── utils/           # 工具函数
-├── frontend/            # Vue3 前端
+├── backend/                          # Flask 后端应用
+│   ├── app.py                        # 主应用入口
+│   ├── config.py                     # 配置管理
+│   ├── extensions.py                 # 扩展初始化
+│   ├── run.py                        # 应用启动脚本
+│   ├── create_tables.py              # 数据库表创建
+│   ├── requirements.txt              # Python 依赖包
+│   ├── models/                       # 数据模型层
+│   │   ├── __init__.py
+│   │   ├── user.py                   # 用户模型
+│   │   ├── menu.py                   # 菜单模型
+│   │   ├── order.py                  # 订单模型
+│   │   └── order_item.py             # 订单明细模型
+│   ├── routes/                       # API 路由层
+│   │   ├── __init__.py
+│   │   ├── auth.py                   # 认证路由
+│   │   ├── menu.py                   # 菜单路由
+│   │   ├── order.py                  # 订单路由
+│   │   └── user.py                   # 用户路由
+│   ├── services/                     # 业务逻辑层
+│   │   ├── __init__.py
+│   │   ├── auth_service.py           # 认证服务
+│   │   ├── menu_service.py           # 菜单服务
+│   │   └── order_service.py          # 订单服务
+│   └── start_app.py                  # 开发服务器启动
+├── frontend/                         # Vue3 前端应用
+│   ├── package.json                  # 项目依赖和配置
+│   ├── vite.config.js                # Vite 构建配置
+│   ├── index.html                    # HTML 模板
+│   ├── .eslintrc-auto-import.json    # ESLint 自动导入配置
 │   ├── src/
-│   │   ├── components/  # 公共组件
-│   │   │   ├── AppHeader.vue      # 应用头部
-│   │   │   ├── AppFooter.vue      # 应用底部
-│   │   │   ├── CoffeeCard.vue     # 咖啡卡片
-│   │   │   └── CartFloatButton.vue # 购物车浮动按钮
-│   │   ├── views/         # 页面组件
-│   │   │   ├── MenuPage.vue      # 菜单浏览
-│   │   │   ├── CartPage.vue      # 购物车
-│   │   │   ├── OrderPage.vue     # 订单管理
-│   │   │   ├── ProfilePage.vue   # 个人中心
-│   │   │   ├── LoginPage.vue     # 登录页面
-│   │   │   └── RegisterPage.vue  # 注册页面
-│   │   ├── api/           # API 封装
-│   │   ├── store/         # Pinia 状态管理
-│   │   ├── router/        # 路由配置
-│   │   ├── utils/         # 工具函数
-│   │   ├── composables/   # 组合式函数
-│   │   └── layouts/       # 布局组件
-├── database/             # 数据库脚本
-│   ├── schema.sql        # 表结构
-│   └── init_data.sql     # 初始数据
-└── 项目进度报告.md       # 开发进度
+│   │   ├── main.js                   # 应用入口
+│   │   ├── App.vue                   # 根组件
+│   │   ├── components/               # 公共组件
+│   │   │   ├── AppHeader.vue         # 应用头部
+│   │   │   ├── AppFooter.vue         # 应用底部
+│   │   │   ├── CoffeeCard.vue        # 咖啡卡片
+│   │   │   ├── CartFloatButton.vue   # 购物车浮动按钮
+│   │   │   └── admin/                # 管理员组件
+│   │   │       ├── AdminHeader.vue   # 管理员头部
+│   │   │       └── AdminSidebar.vue  # 管理员侧边栏
+│   │   ├── views/                    # 页面组件
+│   │   │   ├── LoginPage.vue         # 登录页面
+│   │   │   ├── RegisterPage.vue      # 注册页面
+│   │   │   ├── MenuPage.vue          # 菜单浏览
+│   │   │   ├── CartPage.vue          # 购物车
+│   │   │   ├── OrderPage.vue         # 订单管理
+│   │   │   ├── ProfilePage.vue       # 个人中心
+│   │   │   ├── NotFoundPage.vue      # 404页面
+│   │   │   └── admin/                # 管理员页面
+│   │   │       ├── DashboardPage.vue # 管理仪表板
+│   │   │       ├── MenuManagePage.vue# 菜单管理
+│   │   │       ├── OrderManagePage.vue# 订单管理
+│   │   │       └── UserManagePage.vue# 用户管理
+│   │   ├── layouts/                  # 布局组件
+│   │   │   ├── DefaultLayout.vue     # 默认布局
+│   │   │   ├── AuthLayout.vue        # 认证页面布局
+│   │   │   └── AdminLayout.vue       # 管理员布局
+│   │   ├── api/                      # API 封装层
+│   │   │   ├── index.js              # Axios 配置
+│   │   │   ├── auth.js               # 认证 API
+│   │   │   ├── menu.js               # 菜单 API
+│   │   │   └── order.js              # 订单 API
+│   │   ├── store/                    # Pinia 状态管理
+│   │   │   ├── index.js              # Store 入口
+│   │   │   ├── auth.js               # 认证状态
+│   │   │   └── cart.js               # 购物车状态
+│   │   ├── router/                   # 路由配置
+│   │   │   └── index.js              # 路由定义
+│   │   ├── utils/                    # 工具函数
+│   │   │   └── animations.js         # 动画工具
+│   │   └── composables/              # 组合式函数
+│   │       └── useAnimation.js       # 动画钩子
+├── database/                         # 数据库相关
+│   ├── README.md                     # 数据库说明
+│   ├── schema.sql                    # 完整表结构
+│   ├── schema_simple.sql             # 简化表结构
+│   ├── init_data.sql                 # 初始数据
+│   └── setup_mysql.sql               # MySQL 设置脚本
+├── 项目架构.md                       # 项目架构文档
+├── 项目进度报告.md                   # 开发进度报告
+└── README.md                         # 项目说明文档
 ```
 
 ## 🚀 快速开始
 
-### 环境要求
-- Python 3.8+
-- Node.js 16+
-- MySQL 8.0+
+### 📋 环境要求
+- **Python**: 3.8+
+- **Node.js**: 16+
+- **MySQL**: 8.0+
+- **npm**: 7+
 
-### 后端启动
+### 🛠️ 安装步骤
+
+#### 1. 克隆项目
+```bash
+git clone https://github.com/your-username/coffee-ordering-system.git
+cd coffee-ordering-system
+```
+
+#### 2. 数据库设置
+```sql
+-- 创建数据库
+CREATE DATABASE coffee_ordering DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 创建用户 (可选)
+CREATE USER 'coffee_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON coffee_ordering.* TO 'coffee_user'@'localhost';
+FLUSH PRIVILEGES;
+
+-- 导入数据库结构
+mysql -u root -p coffee_ordering < database/schema.sql
+
+-- 导入初始数据 (可选)
+mysql -u root -p coffee_ordering < database/init_data.sql
+```
+
+#### 3. 后端启动
 ```bash
 # 进入后端目录
 cd backend
 
 # 创建虚拟环境
 python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-# 或
-.venv\Scripts\activate     # Windows
+
+# 激活虚拟环境
+# Windows
+.venv\Scripts\activate
+# Linux/Mac
+source .venv/bin/activate
 
 # 安装依赖
 pip install -r requirements.txt
 
 # 配置环境变量
-cp .env.example .env
-# 编辑 .env 文件，配置数据库连接等信息
+# 创建 .env 文件并配置数据库连接
+echo "DATABASE_URL=mysql+pymysql://username:password@localhost/coffee_ordering" > .env
+echo "JWT_SECRET_KEY=your-super-secret-jwt-key" >> .env
+echo "FLASK_ENV=development" >> .env
 
 # 初始化数据库
-python run.py init-db
+python create_tables.py
 
-# 启动应用
-python run.py
+# 启动开发服务器
+python start_app.py
 ```
 
-### 前端启动
+后端服务将在 `http://localhost:5000` 启动
+
+#### 4. 前端启动
 ```bash
 # 进入前端目录
 cd frontend
@@ -138,19 +219,41 @@ npm install
 # 启动开发服务器
 npm run dev
 
-# 构建生产版本
+# 或者构建生产版本
 npm run build
 ```
 
-### 数据库配置
-```sql
--- 创建数据库
-CREATE DATABASE coffee_ordering DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+前端服务将在 `http://localhost:5173` 启动
 
--- 创建用户 (可选)
-CREATE USER 'coffee_user'@'localhost' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON coffee_ordering.* TO 'coffee_user'@'localhost';
-FLUSH PRIVILEGES;
+### 🔧 环境变量配置
+
+#### 后端环境变量 (.env)
+```bash
+# 数据库配置
+DATABASE_URL=mysql+pymysql://username:password@localhost/coffee_ordering
+
+# JWT配置
+JWT_SECRET_KEY=your-super-secret-jwt-key
+JWT_ACCESS_TOKEN_EXPIRES=3600
+
+# Flask配置
+FLASK_ENV=development
+FLASK_DEBUG=True
+SECRET_KEY=your-flask-secret-key
+
+# 文件上传配置
+UPLOAD_FOLDER=uploads
+MAX_CONTENT_LENGTH=16777216
+```
+
+#### 前端环境变量 (.env.development)
+```bash
+# API基础URL
+VITE_API_BASE_URL=http://localhost:5000/api
+
+# 应用配置
+VITE_APP_TITLE=咖啡点餐系统
+VITE_APP_VERSION=1.0.0
 ```
 
 ## 🎯 功能特性
@@ -175,15 +278,26 @@ FLUSH PRIVILEGES;
 - **输入验证** - 前后端双重数据验证
 - **SQL 注入防护** - ORM 防护 + 参数化查询
 
-## 📊 项目进度
+## 📊 开发进度
 
-- ✅ **后端开发** - Flask 应用、API 接口、数据模型 (100%)
-- ✅ **前端基础** - Vue3 应用、路由、状态管理 (100%)
-- ✅ **用户界面** - 菜单、购物车、订单、个人中心 (100%)
-- ✅ **公共组件** - 头部、底部、卡片组件 (90%)
-- ✅ **动画效果** - Animate.css 集成、页面过渡 (100%)
-- 🚧 **管理后台** - 管理员功能开发中 (0%)
-- 📋 **测试优化** - 单元测试、性能优化 (0%)
+### ✅ 已完成功能 (75%)
+- **后端开发** - Flask 应用、API 接口、数据模型 (100%)
+- **前端基础** - Vue3 应用、路由、状态管理 (100%)
+- **认证系统** - JWT认证、用户注册登录、权限控制 (100%)
+- **用户界面** - 菜单浏览、购物车、订单管理、个人中心 (100%)
+- **公共组件** - 头部导航、底部、咖啡卡片、购物车按钮 (90%)
+- **动画效果** - Animate.css 集成、页面过渡动画 (100%)
+- **响应式设计** - 移动端适配、多屏幕支持 (100%)
+
+### 🚧 开发中功能
+- **管理后台** - 管理员仪表板、菜单管理、订单管理 (30%)
+
+### 📋 待开发功能
+- **支付集成** - 支付宝、微信支付接口 (0%)
+- **消息通知** - 订单状态变更通知 (0%)
+- **数据统计** - 销售报表、用户分析 (0%)
+- **单元测试** - 前后端测试用例编写 (0%)
+- **性能优化** - 缓存策略、代码分割 (0%)
 
 **总体完成度: 75%**
 
@@ -203,7 +317,7 @@ FLUSH PRIVILEGES;
 3. **用户管理** - 用户信息管理、权限控制
 4. **数据统计** - 销售统计、用户分析、报表生成
 
-## 🎨 设计规范
+## 🎨 UI/UX 设计
 
 ### 色彩系统
 - **主色调**: #8b4513 (咖啡棕)
@@ -211,41 +325,155 @@ FLUSH PRIVILEGES;
 - **成功色**: #27ae60 (绿色)
 - **警告色**: #f39c12 (橙色)
 - **危险色**: #e74c3c (红色)
+- **文字色**: #2c3e50 (深灰)
+- **背景色**: #ecf0f1 (浅灰)
 
-### 组件规范
-- **按钮**: 圆角设计，悬停动画效果
-- **卡片**: 阴影效果，悬停提升
-- **表单**: 统一的输入框样式，验证提示
+### 设计规范
+- **按钮**: 圆角设计，悬停动画效果，统一尺寸规范
+- **卡片**: 阴影效果，悬停提升，圆角边框
+- **表单**: 统一的输入框样式，实时验证提示
 - **导航**: 响应式菜单，图标配合文字
+- **布局**: 基于栅格系统，灵活适配
 
-### 动画规范
-- **页面切换**: 滑动、淡入淡出过渡
-- **列表项**: 交错进入动画
-- **按钮点击**: 反馈动画效果
-- **加载状态**: 脉冲、旋转动画
+### 动画效果
+- **页面切换**: 滑动、淡入淡出过渡动画
+- **列表项**: 交错进入动画，提升视觉效果
+- **按钮点击**: 反馈动画，增强交互体验
+- **加载状态**: 脉冲、旋转动画，改善等待体验
+- **悬停效果**: 平滑过渡，直观的状态反馈
+
+## 🔗 API 接口文档
+
+### 认证相关
+```
+POST /api/auth/register    # 用户注册
+POST /api/auth/login       # 用户登录
+POST /api/auth/logout      # 用户登出
+POST /api/auth/refresh     # 刷新Token
+GET  /api/auth/profile     # 获取用户信息
+PUT  /api/auth/profile     # 更新用户信息
+```
+
+### 菜单管理
+```
+GET    /api/menu           # 获取菜单列表
+POST   /api/menu           # 添加菜单项 (管理员)
+GET    /api/menu/{id}      # 获取菜单详情
+PUT    /api/menu/{id}      # 更新菜单项 (管理员)
+DELETE /api/menu/{id}      # 删除菜单项 (管理员)
+```
+
+### 订单管理
+```
+GET    /api/orders         # 获取用户订单列表
+POST   /api/orders         # 创建新订单
+GET    /api/orders/{id}    # 获取订单详情
+PUT    /api/orders/{id}    # 更新订单状态 (管理员)
+```
+
+### 管理员功能
+```
+GET /api/admin/dashboard   # 获取仪表板数据
+GET /api/admin/users       # 获取用户列表 (管理员)
+GET /api/admin/stats       # 获取统计数据 (管理员)
+```
+
+## 🛠️ 开发指南
+
+### 代码规范
+- **Python**: 遵循 PEP 8 规范
+- **JavaScript**: 使用 ESLint + Prettier
+- **Vue**: 官方风格指南
+- **CSS**: BEM 命名规范
+- **Git**: 语义化提交信息
+
+### 分支管理
+```
+main          # 主分支，生产环境
+develop       # 开发分支
+feature/*     # 功能分支
+bugfix/*      # 修复分支
+release/*     # 发布分支
+```
+
+### 提交规范
+```
+feat: 新功能
+fix: 修复bug
+docs: 文档更新
+style: 代码格式调整
+refactor: 代码重构
+test: 测试相关
+chore: 构建过程或辅助工具的变动
+```
+
+## 🚀 部署指南
+
+### Docker 部署
+```bash
+# 构建镜像
+docker build -t coffee-ordering-system .
+
+# 运行容器
+docker-compose up -d
+```
+
+### 传统部署
+```bash
+# 后端部署
+gunicorn -w 4 -b 0.0.0.0:5000 app:app
+
+# 前端部署
+npm run build
+# 将 dist 目录部署到 Web 服务器
+```
 
 ## 🤝 贡献指南
 
-1. Fork 项目
+我们欢迎所有形式的贡献！请遵循以下步骤：
+
+1. **Fork** 本项目
 2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
 3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
+5. 创建 **Pull Request**
+
+### 贡献者
+- [@your-username](https://github.com/your-username) - 项目创建者
+- [@contributor-username](https://github.com/contributor-username) - 核心开发者
 
 ## 📝 许可证
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+本项目采用 **MIT 许可证** - 查看 [LICENSE](LICENSE) 文件了解详情
 
 ## 🙏 致谢
+
+感谢以下开源项目的支持：
 
 - [Vue.js](https://vuejs.org/) - 渐进式 JavaScript 框架
 - [Flask](https://flask.palletsprojects.com/) - Python Web 框架
 - [Element Plus](https://element-plus.org/) - Vue 3 UI 组件库
 - [Animate.css](https://animate.style/) - CSS 动画库
 - [MySQL](https://www.mysql.com/) - 关系型数据库
+- [Vite](https://vitejs.dev/) - 现代前端构建工具
+
+## 📞 联系方式
+
+- **项目主页**: https://github.com/your-username/coffee-ordering-system
+- **问题反馈**: https://github.com/your-username/coffee-ordering-system/issues
+- **邮箱**: your-email@example.com
 
 ---
 
-**开发团队**: 咖啡点餐系统开发小组
-**最后更新**: 2024年11月20日
-**版本**: v1.0.0-beta
+<div align="center">
+
+**☕ 咖啡点餐管理系统**
+
+Made with ❤️ by Coffee Team
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Stars](https://img.shields.io/github/stars/your-username/coffee-ordering-system?style=social)](https://github.com/your-username/coffee-ordering-system)
+
+**最后更新**: 2024年11月20日 | **版本**: v1.0.0-beta
+
+</div>

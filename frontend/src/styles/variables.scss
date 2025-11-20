@@ -1,0 +1,166 @@
+// 主题色彩变量
+:root {
+  // 主色调 - 咖啡色系
+  --primary-color: #6F4E37;
+  --primary-light: #8B6F47;
+  --primary-dark: #4A3728;
+
+  // 辅助色
+  --secondary-color: #D4A574;
+  --accent-color: #F5E6D3;
+
+  // 中性色
+  --text-primary: #2C3E50;
+  --text-secondary: #7F8C8D;
+  --text-light: #95A5A6;
+  --border-color: #E1E8ED;
+  --background-color: #FAFBFC;
+  --white: #FFFFFF;
+
+  // 状态色
+  --success-color: #67C23A;
+  --warning-color: #E6A23C;
+  --danger-color: #F56C6C;
+  --info-color: #409EFF;
+
+  // 阴影
+  --shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
+  --shadow-heavy: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+
+  // 圆角
+  --border-radius-small: 4px;
+  --border-radius-medium: 8px;
+  --border-radius-large: 12px;
+
+  // 间距
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  // 字体大小
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 24px;
+
+  // 断点
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 992px;
+  --breakpoint-lg: 1200px;
+}
+
+// 深色主题变量
+[data-theme="dark"] {
+  --text-primary: #E1E8ED;
+  --text-secondary: #B2B8BB;
+  --text-light: #657786;
+  --border-color: #38444D;
+  --background-color: #1A1A1A;
+  --white: #2C3E50;
+}
+
+// SCSS变量
+$primary-color: var(--primary-color);
+$primary-light: var(--primary-light);
+$primary-dark: var(--primary-dark);
+$secondary-color: var(--secondary-color);
+$accent-color: var(--accent-color);
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-light: var(--text-light);
+$border-color: var(--border-color);
+$background-color: var(--background-color);
+$white: var(--white);
+$success-color: var(--success-color);
+$warning-color: var(--warning-color);
+$danger-color: var(--danger-color);
+$info-color: var(--info-color);
+
+$shadow-light: var(--shadow-light);
+$shadow-medium: var(--shadow-medium);
+$shadow-heavy: var(--shadow-heavy);
+
+$border-radius-small: var(--border-radius-small);
+$border-radius-medium: var(--border-radius-medium);
+$border-radius-large: var(--border-radius-large);
+
+$spacing-xs: var(--spacing-xs);
+$spacing-sm: var(--spacing-sm);
+$spacing-md: var(--spacing-md);
+$spacing-lg: var(--spacing-lg);
+$spacing-xl: var(--spacing-xl);
+
+$font-size-xs: var(--font-size-xs);
+$font-size-sm: var(--font-size-sm);
+$font-size-md: var(--font-size-md);
+$font-size-lg: var(--font-size-lg);
+$font-size-xl: var(--font-size-xl);
+$font-size-xxl: var(--font-size-xxl);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-ellipsis-multi($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin card-shadow {
+  box-shadow: $shadow-light;
+  border-radius: $border-radius-medium;
+  background: var(--white);
+}
+
+@mixin button-primary {
+  background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+  border: none;
+  color: $white;
+  font-weight: 500;
+
+  &:hover {
+    background: linear-gradient(135deg, $primary-light 0%, $primary-dark 100%);
+  }
+}
+
+// 响应式断点
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 992px) {
+    @content;
+  }
+}

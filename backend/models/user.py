@@ -80,6 +80,7 @@ class User(db.Model):
     def get_total_spent(self):
         """获取用户总消费金额"""
         from sqlalchemy import func
+        from models.order import Order
         total = db.session.query(func.sum(Order.total_price)).filter_by(user_id=self.id).scalar()
         return float(total) if total else 0.0
 
